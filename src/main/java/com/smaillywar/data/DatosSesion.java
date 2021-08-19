@@ -1,5 +1,7 @@
 package com.smaillywar.data;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,8 @@ import com.smaillywar.entity.Tarea;
 
 public class DatosSesion {
 
+	public static Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
+	
 	private static List<Cuenta> cuentas = new ArrayList<>();
 	
 	private static Cuenta cuentaLogueada = null;
