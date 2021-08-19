@@ -386,4 +386,7 @@ public class MenuLogueadoController {
 			new MenuController(ventana);
 		}
 	}
+	
+	//TODO ACTUALIZAR SOPORTE PARA PANTALLAS DE OTRA RESOLUCION
+	//TODO ACTUALIZAR README
 }
