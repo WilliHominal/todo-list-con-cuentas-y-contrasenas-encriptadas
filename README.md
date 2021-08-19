@@ -1,7 +1,7 @@
 # TODO List
  Lista de tareas usando cuentas con contraseñas encriptadas en Java.
  
-Para probar la aplicación, descargar el archivo todo-list.jar de la carpeta Ejecutable-app (Requiere tener JRE instalado).
+Para probar la aplicación, descargar el archivo todo-list.jar de la carpeta Ejecutable-app (Requiere [Java SE Development Kit 16](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html) o superior).
 
 Menú de inicio para registro/inicio de sesión:
 ![menu_inicio](https://user-images.githubusercontent.com/51136886/130145550-c4a24daf-a80d-49de-a708-89d99bbebd1c.png)
