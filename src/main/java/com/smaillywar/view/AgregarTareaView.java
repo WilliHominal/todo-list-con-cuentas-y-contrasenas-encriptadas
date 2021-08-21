@@ -3,7 +3,6 @@ package com.smaillywar.view;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -77,11 +76,11 @@ public class AgregarTareaView {
 		panelFecha = new JDatePanelImpl(modeloFecha, p);
 		selectorFecha = new JDatePickerImpl(panelFecha, new DateLabelFormatter());
 		
-		selectorFecha.setPreferredSize(new Dimension(255, 25));
+		selectorFecha.setPreferredSize(new Dimension(255*DatosSesion.getResolucionPantalla().width/1920, 25*DatosSesion.getResolucionPantalla().height/1080));
 		for( Component c : selectorFecha.getComponents()){
 			c.setBackground(Color.WHITE);
 			c.setForeground(Color.BLACK);
-			c.setFont(new Font("Serif", Font.PLAIN, 15));
+			c.setFont(Style.getFontSelectorFecha());
 		}
 		
 		agregarBtn = new CustomJButton("AGREGAR");
@@ -102,8 +101,8 @@ public class AgregarTareaView {
 	
 	private void ubicarComponentes() {
 		GridBagConstraints cons = new GridBagConstraints();
-		int separacionLabelTF = 15;
-		int separacionCampos = 20;
+		int separacionLabelTF = 15*DatosSesion.getResolucionPantalla().width/1920;
+		int separacionCampos = 20*DatosSesion.getResolucionPantalla().height/1080;
 		
 		cons.gridx = 0;
 		cons.gridy = 0;

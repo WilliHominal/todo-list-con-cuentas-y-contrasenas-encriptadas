@@ -10,7 +10,7 @@ import com.smaillywar.entity.Tarea;
 
 public class DatosSesion {
 
-	public static Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
+	private static final Dimension RESOLUCION_PANTALLA = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	private static List<Cuenta> cuentas = new ArrayList<>();
 	
@@ -50,5 +50,9 @@ public class DatosSesion {
 			}
 		}
 		return null;
+	}
+	
+	public static Dimension getResolucionPantalla() {
+		return RESOLUCION_PANTALLA;
 	}
 }

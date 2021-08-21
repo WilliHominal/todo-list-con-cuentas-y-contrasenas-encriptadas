@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.smaillywar.data.DatosSesion;
 import com.smaillywar.style.CustomJButton;
 import com.smaillywar.style.Style;
 
@@ -27,7 +28,7 @@ public class MenuView extends JPanel {
 	
 	private void inicializarComponentes() {
 		style = new Style();
-		panelPrincipal = style.setFondo("Fondo");
+		panelPrincipal = style.setFondo("Fondo", DatosSesion.getResolucionPantalla().width, DatosSesion.getResolucionPantalla().height);
 		
 		iniciarSesionBtn = new CustomJButton("INICIAR SESIÓN");
 		crearCuentaBtn = new CustomJButton("CREAR CUENTA");
@@ -42,7 +43,7 @@ public class MenuView extends JPanel {
 		
 		GridBagConstraints cons = new GridBagConstraints();
 		
-		cons.insets.set(0, 0, 75, 0);
+		cons.insets.set(0, 0, 75*DatosSesion.getResolucionPantalla().height/1080, 0);
 		panelPrincipal.add(iniciarSesionBtn, cons);
 		
 		cons.gridy = 1;

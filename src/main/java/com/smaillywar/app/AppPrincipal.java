@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import com.smaillywar.controller.MenuController;
+import com.smaillywar.style.Style;
 
 public class AppPrincipal {
 
@@ -18,6 +19,7 @@ public class AppPrincipal {
 					ventana = new JFrame();
 					setOpcionesVentana();
 					addListenerVentana();
+					Style.setFontsSizes();
 					new MenuController(ventana);
 				} catch (Exception e) {
 					e.printStackTrace();

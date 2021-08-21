@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -23,17 +24,37 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
-public class Style {
+import com.smaillywar.data.DatosSesion;
 
-	private final Color COLOR_FONDO_BOTONES = new Color(121, 44, 130);
-	private final Font FONT_DEFAULT = new Font("Serif", Font.BOLD, 16);
-	private final Font FONT_HEADER = new Font("Serif", Font.BOLD, 24);
-	private final Font FONT_TITULO = new Font("Serif", Font.BOLD, 20);
+public class Style {
 	
-	public JLabel setFondo(String nombreFondo) {
+	private Color COLOR_FONDO_BOTONES = new Color(121, 44, 130);
+	private static Font FONT_SELECTOR_FECHA;
+	private static Font FONT_DEFAULT;
+	private static Font FONT_HEADER;
+	private static Font FONT_TITULO;
+	private static Font FONT_TABLA_HEADER;
+	private static Font FONT_TABLA_FILAS;
+	
+	public static void setFontsSizes() {
+		int scaler = DatosSesion.getResolucionPantalla().getHeight()<1080 ? 2 : 0;
+		FONT_SELECTOR_FECHA = new Font("Serif", Font.PLAIN, 15 - scaler);
+		FONT_DEFAULT = new Font("Serif", Font.BOLD, 16 - scaler);
+		FONT_HEADER = new Font("Serif", Font.BOLD, 24 - scaler);
+		FONT_TITULO = new Font("Serif", Font.BOLD, 20 - scaler);
+		FONT_TABLA_HEADER = new Font("Serif", Font.PLAIN, 17 - 2*scaler);
+		FONT_TABLA_FILAS = new Font("Serif", Font.PLAIN, 15 - scaler);
+	}
+	
+	public static Font getFontSelectorFecha() {
+		return FONT_SELECTOR_FECHA;
+	}
+	
+	public JLabel setFondo(String nombreFondo, int ancho, int alto) {
 		JLabel panelPrincipal = null;
 		try {
-			BufferedImage bf = ImageIO.read(getClass().getResource("/" + nombreFondo + ".jpg"));
+			BufferedImage fondo = ImageIO.read(getClass().getResource("/" + nombreFondo + ".jpg"));
+			BufferedImage bf = scale(fondo, ancho, alto);
 			ImageIcon io = new ImageIcon(bf);
 			panelPrincipal = new JLabel(io);
 			panelPrincipal.setLayout(new GridBagLayout());
@@ -42,6 +63,17 @@ public class Style {
 		}
 		return panelPrincipal;
 	}
+	
+	public static BufferedImage scale(BufferedImage imageToScale, int dWidth, int dHeight) {
+        BufferedImage scaledImage = null;
+        if (imageToScale != null) {
+            scaledImage = new BufferedImage(dWidth, dHeight, imageToScale.getType());
+            Graphics2D graphics2D = scaledImage.createGraphics();
+            graphics2D.drawImage(imageToScale, 0, 0, dWidth, dHeight, null);
+            graphics2D.dispose();
+        }
+        return scaledImage;
+    }
 	
 	public static String regexDatoCuenta() {
 		return "^[\\p{L}\\d\\<\\>\\(\\)\\[\\]\\{\\}\\^\\-\\=\\$\\!\\?\\*\\+\\.\\\\.]{6,}$";
@@ -67,6 +99,11 @@ public class Style {
 		btn.setBackground(COLOR_FONDO_BOTONES);
 		btn.setForeground(Color.WHITE);
 		btn.setFont(FONT_DEFAULT);
+	}
+	
+	public void setEstiloCustomBtnChicoAlargado(CustomJButton btn) {
+		this.setEstiloCustomBtn(btn);
+		btn.setPreferredSize(new Dimension(200, 40));
 	}
 	
 	public void setEstiloCustomBtnChico(CustomJButton btn) {
@@ -105,8 +142,8 @@ public class Style {
 	public void setEstiloTabla(JTable tabla, JScrollPane scrollPane) {
 		Color letraTabla = Color.BLACK;
 		Color fondoTabla = new Color(215, 229, 252);
-		Font fontHeader = new Font("Serif", Font.PLAIN, 18);
-		Font fontFilas = new Font("Serif", Font.PLAIN, 15);
+		Font fontHeader = FONT_TABLA_HEADER;
+		Font fontFilas = FONT_TABLA_FILAS;
 		
 		scrollPane.setBackground(fondoTabla);
 		scrollPane.setEnabled(true);
@@ -143,8 +180,8 @@ public class Style {
 	public void setAlturaFilaTabla(JTable tabla, int fila) {
 		int largoNombre = ((String)tabla.getModel().getValueAt(fila, 1)).length();
 		int largoDesc = ((String)tabla.getModel().getValueAt(fila, 2)).length();
-		final int MAX_LINEA_DESCRIPCION = 50;
-		final int MAX_LINEA_NOMBRE = 26;
+		final int MAX_LINEA_DESCRIPCION = DatosSesion.getResolucionPantalla().width < 1920 ? 42 : 50;
+		final int MAX_LINEA_NOMBRE = DatosSesion.getResolucionPantalla().width < 1920 ? 21 : 26;
 		int cantLineasNombre = 1 + largoNombre / MAX_LINEA_NOMBRE;
 		int cantLineasDesc = 1 + largoDesc / MAX_LINEA_DESCRIPCION;
 		int mayor = cantLineasNombre > cantLineasDesc ? cantLineasNombre : cantLineasDesc;

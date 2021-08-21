@@ -39,15 +39,15 @@ public class MenuLogueadoView extends JLabel {
 	private void inicializarComponentes() {
 		style = new Style();
 		
-		panelPrincipalIzquierdo = style.setFondo("FondoIzq");
-		panelPrincipalDerecho = style.setFondo("FondoDer");
+		panelPrincipalIzquierdo = style.setFondo("FondoIzq", 576*DatosSesion.getResolucionPantalla().width/1920, DatosSesion.getResolucionPantalla().height);
+		panelPrincipalDerecho = style.setFondo("FondoDer", 1344*DatosSesion.getResolucionPantalla().width/1920, DatosSesion.getResolucionPantalla().height);
 		
 		panelIzquierdo = new JPanel();
 		panelIzquierdo.setLayout(new GridBagLayout());
-		panelIzquierdo.setPreferredSize(new Dimension(576,1080));
+		panelIzquierdo.setPreferredSize(new Dimension(576*DatosSesion.getResolucionPantalla().width/1920, DatosSesion.getResolucionPantalla().height));
 		panelDerecho = new JPanel();
 		panelDerecho.setLayout(new GridBagLayout());
-		panelDerecho.setPreferredSize(new Dimension(1344,1080));
+		panelDerecho.setPreferredSize(new Dimension(1344*DatosSesion.getResolucionPantalla().width/1920, DatosSesion.getResolucionPantalla().height));
 		
 		nombreUsuarioLabel = new JLabel("BIENVENIDO USUARIO " + DatosSesion.getCuentaLogueada().getUsuario().toUpperCase());
 		
@@ -66,7 +66,7 @@ public class MenuLogueadoView extends JLabel {
 		
 		GridBagConstraints cons = new GridBagConstraints();
 		
-		int espacioEntreBotones = 55;
+		int espacioEntreBotones = 55*DatosSesion.getResolucionPantalla().height/1080;
 		
 		cons.insets.set(0, 0, espacioEntreBotones, 0);
 		panelPrincipalIzquierdo.add(agregarTareaBtn, cons);

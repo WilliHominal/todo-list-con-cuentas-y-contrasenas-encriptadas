@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.smaillywar.data.DatosSesion;
 import com.smaillywar.style.CustomJButton;
 import com.smaillywar.style.Style;
 
@@ -34,7 +35,7 @@ public class IniciarSesionView extends JPanel {
 	
 	private void inicializarComponentes() {
 		style = new Style();
-		panelPrincipal = style.setFondo("Fondo");
+		panelPrincipal = style.setFondo("Fondo", DatosSesion.getResolucionPantalla().width, DatosSesion.getResolucionPantalla().height);
 		
 		usuarioLabel = new JLabel("USUARIO:");
 		contrasenaLabel = new JLabel("CONTRASEÑA:");
@@ -59,21 +60,24 @@ public class IniciarSesionView extends JPanel {
 		
 		GridBagConstraints cons = new GridBagConstraints();
 		
-		cons.insets.set(0, 0, 25, 10);
+		int separacionCampos = 25*DatosSesion.getResolucionPantalla().height/1080;
+		int separacionLabelTF = 10*DatosSesion.getResolucionPantalla().width/1920;
+		
+		cons.insets.set(0, 0, separacionCampos, separacionLabelTF);
 		cons.anchor = GridBagConstraints.EAST;
 		panelPrincipal.add(usuarioLabel, cons);
 		
 		cons.gridx = 1;
-		cons.insets.set(0, 0, 25, 0);
+		cons.insets.set(0, 0, separacionCampos, 0);
 		cons.anchor = GridBagConstraints.WEST;
 		panelPrincipal.add(usuarioTF, cons);
 		
 		cons.gridy = 1;
-		cons.insets.set(0, 0, 50, 0);
+		cons.insets.set(0, 0, 2*separacionCampos, 0);
 		panelPrincipal.add(contrasenaTF, cons);
 		
 		cons.gridx = 0;
-		cons.insets.set(0, 0, 50, 10);
+		cons.insets.set(0, 0, 2*separacionCampos, separacionLabelTF);
 		cons.anchor = GridBagConstraints.EAST;
 		panelPrincipal.add(contrasenaLabel, cons);
 		

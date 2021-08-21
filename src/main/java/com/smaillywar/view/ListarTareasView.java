@@ -69,14 +69,11 @@ public class ListarTareasView {
 		
 		style.setEstiloHeaderLabel(mensajeNombreUsuarioLabel);
 		style.setEstiloTituloLabel(tituloLabel);
-		style.setEstiloCustomBtnChico(cambiarTareasVisibles);
+		style.setEstiloCustomBtnChicoAlargado(cambiarTareasVisibles);
 		style.setEstiloLabel(infoBajoTablaLabel);
 		infoBajoTablaLabel.setForeground(Color.BLACK);
-		style.setEstiloCustomBtnChico(guardarCambiosBtn);
-		style.setEstiloCustomBtnChico(eliminarTareaBtn);
-		cambiarTareasVisibles.setPreferredSize(new Dimension(cambiarTareasVisibles.getPreferredSize().width+30,cambiarTareasVisibles.getPreferredSize().height));
-		guardarCambiosBtn.setPreferredSize(new Dimension(guardarCambiosBtn.getPreferredSize().width+30,guardarCambiosBtn.getPreferredSize().height));
-		eliminarTareaBtn.setPreferredSize(new Dimension(eliminarTareaBtn.getPreferredSize().width+30,eliminarTareaBtn.getPreferredSize().height));
+		style.setEstiloCustomBtnChicoAlargado(guardarCambiosBtn);
+		style.setEstiloCustomBtnChicoAlargado(eliminarTareaBtn);
 	}
 	
 	private void cargarTabla() {
@@ -109,16 +106,18 @@ public class ListarTareasView {
 		tareasTable.getColumnModel().getColumn(4).setCellRenderer(centrado);
 		tareasTable.getColumnModel().getColumn(5).setCellRenderer(centrado);
 		
-		tareasTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-		tareasTable.getColumnModel().getColumn(1).setPreferredWidth(180);
-		tareasTable.getColumnModel().getColumn(2).setPreferredWidth(350);
-		tareasTable.getColumnModel().getColumn(3).setPreferredWidth(100);
-		tareasTable.getColumnModel().getColumn(4).setPreferredWidth(150);
-		tareasTable.getColumnModel().getColumn(5).setPreferredWidth(150);
+		Dimension dimensionTabla = new Dimension(1000*DatosSesion.getResolucionPantalla().width/1920, 500*DatosSesion.getResolucionPantalla().height/1080);
+		
+		tareasTable.getColumnModel().getColumn(0).setPreferredWidth(50*dimensionTabla.width/1000);
+		tareasTable.getColumnModel().getColumn(1).setPreferredWidth(180*dimensionTabla.width/1000);
+		tareasTable.getColumnModel().getColumn(2).setPreferredWidth(350*dimensionTabla.width/1000);
+		tareasTable.getColumnModel().getColumn(3).setPreferredWidth(100*dimensionTabla.width/1000);
+		tareasTable.getColumnModel().getColumn(4).setPreferredWidth(150*dimensionTabla.width/1000);
+		tareasTable.getColumnModel().getColumn(5).setPreferredWidth(150*dimensionTabla.width/1000);
 		
 		style.setEstiloTabla(tareasTable, tareasTableScrollPane);
 		
-		tareasTableScrollPane.setPreferredSize(new Dimension(1000, 500));
+		tareasTableScrollPane.setPreferredSize(dimensionTabla);
 		
 		tareasTable.getModel().addTableModelListener(
 			new TableModelListener() {
@@ -201,7 +200,7 @@ public class ListarTareasView {
 	
 	private void ubicarComponentes() {
 		GridBagConstraints cons = new GridBagConstraints();
-		int separacionCampos = 20;
+		int separacionCampos = 20*DatosSesion.getResolucionPantalla().height/1080;
 		
 		cons.gridx = 0;
 		cons.gridy = 0;
